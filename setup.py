@@ -1,5 +1,9 @@
 from setuptools import setup, Extension
 
+requirements = [
+      'smbus2'
+]
+
 extension = Extension(
     'vl53l0x_python',
     define_macros=[],
@@ -23,6 +27,7 @@ setup(name='VL53L0X',
       long_description='''
 VL53L0X sensor for raspberry PI/JetsonTX2.
 ''',
+      install_requires=requirements,
       ext_modules=[extension],
       package_dir={'': 'python'},
       py_modules=['VL53L0X'],
