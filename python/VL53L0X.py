@@ -24,6 +24,7 @@
 from ctypes import CDLL, CFUNCTYPE, POINTER, c_int, c_uint, pointer, c_ubyte, c_uint8, c_uint32
 import pkg_resources
 import os
+import glob
 SMBUS='smbus'
 for dist in pkg_resources.working_set:
     #print(dist.project_name, dist.version)
@@ -80,10 +81,14 @@ _I2C_WRITE_FUNC = CFUNCTYPE(c_int, c_ubyte, c_ubyte, POINTER(c_ubyte), c_ubyte)
 
 # Load VL53L0X shared lib
 dir, _ = os.path.split(__file__)
-_POSSIBLE_LIBRARY_LOCATIONS = [os.path.join(dir, '../bin')] + site.getsitepackages()
-for lib_location in _POSSIBLE_LIBRARY_LOCATIONS:
+_POSSIBLE_LIBRARY_LOCATIONS = [dir, os.path.join(dir, '../bin')] 
+_POSSIBLE_LIBRARIES = [glob.glob(os.path.join(y, 'vl53l0x_python.*.so')) for y in _POSSIBLE_LIBRARY_LOCATIONS]
+_POSSIBLE_LIBRARIES = [y for x in _POSSIBLE_LIBRARIES for y in x]
+
+print(_POSSIBLE_LIBRARIES)
+for lib_location in _POSSIBLE_LIBRARIES:
     try:
-        _TOF_LIBRARY = CDLL(lib_location + "/vl53l0x_python.so")
+        _TOF_LIBRARY = CDLL(lib_location)
         break
     except OSError:
         pass
