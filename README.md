@@ -6,6 +6,10 @@ Patterned after the cassou/VL53L0X_rasp repository (https://github.com/cassou/VL
 
 In order to be able to share the i2c bus with other python code that uses the i2c bus, this library implements the VL53L0X platform specific i2c functions through callbacks to the python smbus interface. 
 
+Version 1.0.5:
+- Fix issue when pip installing and compiled library file does not match pattern exactly
+
+
 Version 1.0.2:
 - Add support for TCA9548A I2C Multiplexer. Tested with https://www.adafruit.com/products/2717 breakout. (johnbryanmoore)
 - Add python example using TCA9548A Multiplexer support (johnbryanmoore)
