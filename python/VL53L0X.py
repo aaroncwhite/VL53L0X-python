@@ -85,7 +85,6 @@ _POSSIBLE_LIBRARY_LOCATIONS = [dir, os.path.join(dir, '../bin')]
 _POSSIBLE_LIBRARIES = [glob.glob(os.path.join(y, 'vl53l0x_python.*.so')) for y in _POSSIBLE_LIBRARY_LOCATIONS]
 _POSSIBLE_LIBRARIES = [y for x in _POSSIBLE_LIBRARIES for y in x]
 
-print(_POSSIBLE_LIBRARIES)
 for lib_location in _POSSIBLE_LIBRARIES:
     try:
         _TOF_LIBRARY = CDLL(lib_location)
